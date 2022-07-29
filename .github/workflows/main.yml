@@ -1,4 +1,4 @@
-name: Deploy To Heroku 
+ name: Deploy To Heroku 
 
 on: workflow_dispatch
 
@@ -17,5 +17,6 @@ jobs:
           stack: "container"
           region: "eu"
         env:
-          HD_CONFIG_FILE_URL: ${{secrets.CONFIG_FILE_URL}}
+          HD_HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
+          HD_HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
           
