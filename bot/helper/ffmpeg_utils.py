@@ -37,7 +37,7 @@ def encode(filepath):
     else:
         # Transcode to h265 / hvc1
         #video_opts = '-c:v libx265 -crf 28 -tag:v hvc1 -preset fast -threads 8'
-        video_opts = '-c:v libx265 -map 0 -crf 26 -profile:v main10 -threads 8 -preset fast -pix_fmt yuv420p10le'
+        video_opts = '-c:v libx265 -hide_banner-vf scale=1280:-2 -map 0 -crf 25 -profile:v main10 -threads 8 -preset veryfast -pix_fmt yuv420p10le'
     # Get the audio channel codec
     audio_codec = get_codec(filepath, channel='a:0')
     if audio_codec == []:
@@ -45,7 +45,7 @@ def encode(filepath):
     elif audio_codec[0] == 'aac':
         audio_opts = '-c:a copy'
     else:
-        audio_opts = '-c:a aac -b:a 128k'
+        audio_opts = '-c:a aac -b:a 128k -ac 2'
     call(['ffmpeg', '-i', filepath] + video_opts.split() + audio_opts.split() + [output_filepath])
     os.remove(filepath)
     return output_filepath
